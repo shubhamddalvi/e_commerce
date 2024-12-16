@@ -1,0 +1,10 @@
+.MainBody{
+    margin-top: 18vh;
+}
+
+@media screen and (max-width: 700px) {
+    .MainBody{
+        margin-top: 9vh;
+      }   
+    
+}

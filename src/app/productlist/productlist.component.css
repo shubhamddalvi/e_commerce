@@ -1,0 +1,29 @@
+
+
+.productName{
+  border-bottom: 1px solid gainsboro;
+}  
+img{
+  padding: 2px;
+    border-radius: 12px;
+}
+
+img:hover{
+  padding: 0px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+/* Filter */
+.filterBox{
+  position: sticky;
+  top: 15vh;
+}
+
+
+.filterBottonMobile{
+  padding:13px 10px;
+  font-size: 20px;
+  border: none;
+  background-color: white;
+  border: 1px solid gainsboro;
+}

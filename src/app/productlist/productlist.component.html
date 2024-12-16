@@ -1,0 +1,83 @@
+<app-header
+[cartCount]="cartList.length"
+></app-header>
+
+<div class="col-2">
+  <button 
+  mat-raised-button
+  color="accent"
+  *ngIf="filterSection == false"
+   (click)="filterSection = !filterSection"
+   class=" viewFilterLaptop w-100 d-none d-lg-block ms-2 ">
+  <i class="bi bi-sliders me-2"></i>Filter
+</button>
+</div>
+
+<div class="row mx-auto mt-2 ">
+  <div 
+  class="col-lg-3" *ngIf="filterSection">
+    <div class="filterBox p-2">
+      <div class="d-flex justify-content-between align-items-center " >
+        <h2 class="fw-bold"><i class="bi bi-sliders"></i> Filter By</h2>
+        <h4> <i (click)="filterSection = false"  class="clicakble bi bi-x-circle-fill"></i> </h4>
+      </div>
+      <div class="d-flex gap-2 mt-2">
+        <button  (click)="getAllProducts()" mat-raised-button  class="w-100 ">Clear</button>
+        <button (click)="ApplyFilter()"  mat-raised-button color="accent" class="w-100">Apply</button>
+      </div>
+      <div class="filterOption mx-auto mt-2">
+        <h4 class="my-0 text-secondary">Price</h4>
+        <mat-slider class="w-100"  [min]="static_min_price" [max]="static_max_price">
+          <input [(ngModel)]="min_price" matSliderStartThumb>
+          <input [(ngModel)]="max_price" matSliderEndThumb>
+        </mat-slider>
+        <div class="d-flex justify-content-between ">
+          <h3>{{min_price | currency:'INR':'symbol-narrow'}}</h3>
+          <h3> To </h3>
+          <h3>{{max_price | currency:'INR':'symbol-narrow'}}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div 
+  [ngClass]="filterSection ? 'col-lg-9' : 'col-lg-12 '"
+  class=" mx-auto mb-5">
+    <div class="row">
+      <div *ngFor="let item of productList" class="col-lg-3  col-6 mb-3">
+        <div class="card_block">
+          <div>
+            <img [src]="item.pic" class="w-100 h-100 " alt="" srcset="">
+          </div>
+          <div class="p-1">
+            <div class="w-100 productName d-flex justify-content-between ">
+              <span class="mb-0  fw-bold ">{{item.name | titlecase}}</span>
+              <i 
+              [ngStyle]="{'color' : liked_products.includes(item.id) ? '#ff4081' : 'gainsboro'}"
+              (click)="addToFavourate(item.id)" 
+              class="clicakble bi bi-heart-fill">
+              </i>
+            </div>
+            <div class="w-100 d-flex justify-content-between align-items-end ">
+              <div>
+                <h5 class="text-secondary mb-0">{{item.type | titlecase}}</h5>
+                <span class="fw-bold">{{item.price | currency:'INR':'symbol-narrow'}}</span>
+              </div>
+              <h2 class="m-0">
+                <i 
+                (click)="addToCart(item.id)"
+                [ngClass]="cart_products.includes(item.id)? 'bi bi-cart-check text-dark ' : 'bi bi-cart-plus text-secondary'"
+                class="clicakble "></i>
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<button 
+   *ngIf="filterSection == false"
+   (click)="mobileFilterActive()"
+   class="fixed-bottom filterBottonMobile d-block d-lg-none primaryColor ">
+  <i class="bi bi-sliders me-2"></i>Filter
+</button>
